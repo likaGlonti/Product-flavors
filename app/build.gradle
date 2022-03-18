@@ -6,6 +6,15 @@ plugins {
 android {
     compileSdk 32
 
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('C:/Users/Lika_Glonti/.android/debug.keystore')
+            storePassword 'android'
+        }
+    }
+
     defaultConfig {
         applicationId "com.epam.flavor"
         minSdk 21
@@ -34,12 +43,14 @@ android {
         epam {
             dimension "environment"
             manifestPlaceholders = [app_name: "EPAM"]
+            signingConfig signingConfigs.debug
         }
         customer {
             dimension "environment"
             manifestPlaceholders = [app_name: "EPAM-Customer"]
             applicationIdSuffix ".customer"
             versionNameSuffix "-customer"
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
